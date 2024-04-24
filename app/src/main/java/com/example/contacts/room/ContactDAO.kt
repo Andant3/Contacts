@@ -1,4 +1,4 @@
-package com.example.contacts
+package com.example.contacts.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Delete
