@@ -11,8 +11,8 @@ data class ContactModel(
     val id: Int,
 
     @ColumnInfo(name = "contact_name")
-    val name: String,
+    var name: String,
 
     @ColumnInfo(name = "contact_email")
-    val email: String
+    var email: String
 )
