@@ -59,7 +59,7 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
         repository.deleteAll()
     }
 
-    fun saveOrDelete(){
+    fun saveOrUpdate(){
         if(isUpdateOrDelete){
             contactToUpdateOrDelete.name = inputName.value!!
             contactToUpdateOrDelete.email = inputEmail.value!!
