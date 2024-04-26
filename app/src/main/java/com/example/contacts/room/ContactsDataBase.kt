@@ -15,9 +15,7 @@ abstract class ContactsDataBase : RoomDatabase() {
         private var INSTANCE: ContactsDataBase?= null
 
         fun getInstance(context: Context): ContactsDataBase {
-
             synchronized(this){
-
                 var instance = INSTANCE
                 if (instance == null){
                     instance = Room.databaseBuilder(
