@@ -34,11 +34,11 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("Not yet implemented")
+
     }
 
     fun insert(contact: ContactModel) = viewModelScope.launch{

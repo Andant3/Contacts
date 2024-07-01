@@ -1,6 +1,7 @@
 package com.example.contacts
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -10,8 +11,11 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.contacts.databinding.ActivityMainBinding
 import com.example.contacts.repository.ContactRepository
 import com.example.contacts.room.ContactDAO
+import com.example.contacts.room.ContactModel
 import com.example.contacts.room.ContactsDataBase
+import com.example.contacts.view.ContactsRecyclerViewAdapter
 import com.example.contacts.viewmodel.ContactViewModel
+import com.example.contacts.viewmodel.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,8 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         val dao = ContactsDataBase.getInstance(applicationContext).contactDAO
         val repository = ContactRepository(dao)
+        val factory = ViewModelFactory(repository)
 
-        contactViewModel = ViewModelProvider(this)
+        contactViewModel = ViewModelProvider(this, factory)
             .get(ContactViewModel::class.java)
 
         binding.contactViewModel = contactViewModel
@@ -44,7 +49,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayUsersList() {
         contactViewModel.contacts.observe(this, Observer {
-            //binding.contactsRecyclerView.adapter =
+            binding.contactsRecyclerView.adapter = ContactsRecyclerViewAdapter(
+                it
+            ) { selectedItem: ContactModel ->
+                listItemClicked(selectedItem)
+            }
         })
+    }
+
+    private fun listItemClicked(selectedItem: ContactModel) {
+
+        Toast.makeText(
+            this,
+            "${selectedItem.name} clicked",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        contactViewModel.initUpdateAndDelete(selectedItem)
     }
 }
