@@ -60,7 +60,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
     //Kotlin Kapt
-    kapt("groupId:artifactId:version")
+    kapt("androidx.room:room-compiler:$room_version")
 
     //ViewModel
     val lifecycle_version = "2.7.0"
